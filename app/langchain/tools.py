@@ -19,7 +19,7 @@ class CrafterTools:
     @tool
     def chain_data_engineering(self, input_text) -> str:
         prompt = ChatPromptTemplate.from_messages([
-            ("system", "..."),
+            ("system", system_prompts.prompt_chain_data_engineering),
             ("user", "{input}")
         ])
 
@@ -30,7 +30,7 @@ class CrafterTools:
     @tool
     def chain_ml_engineering(self, input_text) -> str:
         prompt = ChatPromptTemplate.from_messages([
-            ("system", "..."),
+            ("system", system_prompts.prompt_chain_ml_engineering),
             ("user", "{input}")
         ])
 
@@ -41,7 +41,7 @@ class CrafterTools:
     @tool
     def chain_mlops(self, input_text) -> str:
         prompt = ChatPromptTemplate.from_messages([
-            ("system", "..."),
+            ("system", system_prompts.prompt_chain_mlops),
             ("user", "{input}")
         ])
 
@@ -52,7 +52,7 @@ class CrafterTools:
     @tool
     def chain_data_science(self, input_text) -> str:
         prompt = ChatPromptTemplate.from_messages([
-            ("system", "..."),
+            ("system", system_prompts.prompt_chain_data_science),
             ("user", "{input}")
         ])
 
@@ -61,4 +61,3 @@ class CrafterTools:
         return chain.invoke({"input": input_text})
 
 tools = [CrafterTools()]
-
