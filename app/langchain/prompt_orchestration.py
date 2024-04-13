@@ -22,5 +22,3 @@ class SystemPromptGenerator:
 
     def prompt_chain_data_science(self, data_context=consts['data_science']):
         return self.prompt_template.format(data_context=data_context)
-    
-    
