@@ -76,3 +76,12 @@ class SystemPromptGenerator:
         """
         data_context = self.consts['data_science'] if data_context is None else data_context
         return self.prompt_template.format(data_context=data_context)
+    
+    def prompt_agent_description(self):
+        """
+        Generate a description of the agent.
+
+        Returns:
+            str: The generated prompt.
+        """
+        return self.text.prompt_agent()

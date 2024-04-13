@@ -10,7 +10,7 @@ class DataCrafterAgent:
         Initializes a new instance of the DataCrafterAgent class.
 
         Args:
-            model (str): The model to be used by the agent.
+            model (GenerativeModel): The model to be used by the agent.
             tools (list): The list of tools to be used by the agent.
             prompt (str): The prompt to be used by the agent.
         """
@@ -24,5 +24,6 @@ class DataCrafterAgent:
         Args:
             input_text (str): The input text to be processed by the agent.
         """
-        self.agent_executor.invoke({"input": input_text})
+        return self.agent_executor.invoke({"input": input_text})
+
 
