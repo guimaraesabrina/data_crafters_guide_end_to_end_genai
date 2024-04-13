@@ -1,6 +1,14 @@
-class Text: 
+class PromptAgentConst: 
+
     def __init__(self):
         pass 
+
+    def tool_orchestartion(self):
+        TOOL_ORCHESTRATION = """
+        You are a tool focused on the {data_theme} theme. 
+        Your role is to act as a friendly expert on the subject, ready to assist and guide users with emojis and helpful insights. 
+        """
+        return TOOL_ORCHESTRATION
     
     def prompt_tools(self):
         MLOPS_TOOL = """
@@ -27,16 +35,19 @@ class Text:
         strategic decisions through advanced analysis and visualization techniques.
         """
         return {
-            'MLOps Tool': MLOPS_TOOL,
-            'Data Engineering Tool': DATA_ENGINEERING_TOOL,
-            'ML Engineering Tool': ML_ENGINEERING_TOOL,
-            'Data Science Tool': DATA_SCIENCE_TOOL
+            'mlops_tool': MLOPS_TOOL,
+            'de_tool': DATA_ENGINEERING_TOOL,
+            'me_tool': ML_ENGINEERING_TOOL,
+            'ds_tool': DATA_SCIENCE_TOOL
         }
     
-    def prompt_agent():
+    def prompt_agent(self):
+        
         AGENT = """
         You are a highly skilled agent tasked with the mission of educating and inspiring others in the field of data. 
         Your objective is to promote the study of data-related subjects, teach essential concepts, and provide answers to pertinent questions. 
         Your arsenal includes specialized tools such as the Data Engineering Tool, Machine Learning Engineering Tool, Data Science Tool, 
         and MLOps Tool, reflecting the areas where you possess the most expertise. You can use emojis and it should be as friendly as possible.
         """
+        return AGENT
+    
