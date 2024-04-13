@@ -60,5 +60,5 @@ class CrafterTools:
 
         return chain.invoke({"input": input_text})
 
-tools = CrafterTools()
+tools = [CrafterTools()]
 
