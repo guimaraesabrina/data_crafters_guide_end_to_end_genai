@@ -3,7 +3,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.tools import tool
 
 from app.setup.model import GenerativeModel
-from app.langchain.prompts import SystemPromptGenerator
+from estudos.data_crafters_guide_end_to_end_genai.app.langchain.prompt_orchestration import SystemPromptGenerator
 
 output_parser = StrOutputParser()
 
