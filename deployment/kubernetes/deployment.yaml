@@ -1,20 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ""
+  name: datacrafters-generative
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: ""
+      app: datacrafters-generative
   template:
     metadata:
       labels:
-        app: ""
+        app: datacrafters-generative
     spec:
       containers:
-      - name: ""
-        image: ""
+      - name: datacrafters-generative-container
+        image: guimaraesabri/datacrafters-generative:develop  
+        imagePullPolicy: Always  
         ports:
         - containerPort: 8080
         env:
@@ -43,4 +44,6 @@ spec:
             secretKeyRef:
               name: openai-credentials
               key: deployment_name
+
+
 
