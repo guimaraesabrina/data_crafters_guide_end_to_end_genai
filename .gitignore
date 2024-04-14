@@ -1,3 +1,13 @@
+# cxclude the following files
 /deployment/kubernetes/secret.yaml
 /notebooks/credentials.json
+
+# cxclude all __pycache__ directories and .pyc files
+__pycache__/
+*.pyc
+
+# alternatively, to ensure that any __pycache__ folder anywhere in the repository is ignored
+**/__pycache__/
+**/*.pyc
+
 
