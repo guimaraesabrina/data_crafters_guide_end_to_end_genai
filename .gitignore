@@ -1,8 +1,8 @@
-# cxclude the following files
+# exclude the following files
 /deployment/kubernetes/secret.yaml
 /notebooks/credentials.json
 
-# cxclude all __pycache__ directories and .pyc files
+# exclude all __pycache__ directories and .pyc files
 __pycache__/
 *.pyc
 
