@@ -1,6 +1,10 @@
 # exclude the following files
 /deployment/kubernetes/secret.yaml
-/notebooks/credentials.json
+/notebooks/openai.json
+/notebooks/embeddings.json
+deployment/kubernetes/openai-credentials.yaml
+
+*.json
 
 # exclude all __pycache__ directories and .pyc files
 __pycache__/
