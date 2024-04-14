@@ -22,3 +22,4 @@ EXPOSE 8000
 # Command to run the application using Uvicorn
 CMD ["uvicorn", "app.backend.crafter:app", "--host", "0.0.0.0", "--port", "8000"]
 
+# docker build -t datacrafters-generative -f Dockerfile ../../
