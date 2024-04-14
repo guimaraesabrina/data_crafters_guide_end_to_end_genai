@@ -1,87 +1,64 @@
 from langchain.prompts import PromptTemplate
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
 from app.common.text import PromptAgentConst
 from app.common.consts import TextAgentConst
 
 class SystemPromptGenerator:
-    """
-    This class is responsible for generating system prompts.
-    """
-
     def __init__(self):
-        """
-        Initialize the SystemPromptGenerator with text, constants and a prompt template.
-        """
         self.text = PromptAgentConst()
         self.consts = TextAgentConst()
-        self.prompt_template = PromptTemplate()
+        self.templates = {
+            'mlops': PromptTemplate.from_template(
+                "You are a tool focused on the theme in MLOps. "
+                "Your role is to act as a friendly expert on the subject, ready to assist and guide users with emojis and helpful insights."
+            ),
+            'data_engineering': PromptTemplate.from_template(
+                "You are a tool focused on the theme in Data Engineering. "
+                "Your role is to act as a friendly expert on the subject, ready to assist and guide users with emojis and helpful insights."
+            ),
+            'machine_learning_engineering': PromptTemplate.from_template(
+                "You are a tool focused on the theme in Machine Learning Engineering. "
+                "Your role is to act as a friendly expert on the subject, ready to assist and guide users with emojis and helpful insights."
+            ),
+            'data_science': PromptTemplate.from_template(
+                "You are a tool focused on the theme in Data Science. "
+                "Your role is to act as a friendly expert on the subject, ready to assist and guide users with emojis and helpful insights."
+            )
+        }
 
-    def prompt_tool_orchestration(self):
-        """
-        Generate a tool orchestration prompt.
-
-        Returns:
-            str: The generated prompt.
-        """
-        return self.text.tool_orchestration()
-
-    def prompt_chain_mlops(self, data_context=None):
-        """
-        Generate a MLOps prompt.
-
-        Args:
-            data_context (dict, optional): The data context for the prompt. Defaults to 'mlops'.
-
-        Returns:
-            str: The generated prompt.
-        """
-        data_context = self.consts['mlops'] if data_context is None else data_context
-        return self.prompt_template.format(data_context=data_context)
-
-    def prompt_chain_data_engineering(self, data_context=None):
-        """
-        Generate a data engineering prompt.
-
-        Args:
-            data_context (dict, optional): The data context for the prompt. Defaults to 'data_engineering'.
-
-        Returns:
-            str: The generated prompt.
-        """
-        data_context = self.consts['data_engineering'] if data_context is None else data_context
-        return self.prompt_template.format(data_context=data_context)
-
-    def prompt_chain_ml_engineering(self, data_context=None):
-        """
-        Generate a machine learning engineering prompt.
-
-        Args:
-            data_context (dict, optional): The data context for the prompt. Defaults to 'machine_learning_engineering'.
-
-        Returns:
-            str: The generated prompt.
-        """
-        data_context = self.consts['machine_learning_engineering'] if data_context is None else data_context
-        return self.prompt_template.format(data_context=data_context)
-
-    def prompt_chain_data_science(self, data_context=None):
-        """
-        Generate a data science prompt.
-
-        Args:
-            data_context (dict, optional): The data context for the prompt. Defaults to 'data_science'.
-
-        Returns:
-            str: The generated prompt.
-        """
-        data_context = self.consts['data_science'] if data_context is None else data_context
-        return self.prompt_template.format(data_context=data_context)
-    
     def prompt_agent_description(self):
         """
-        Generate a description of the agent.
+        Create and retrieve a structured prompt template for the agent.
 
         Returns:
-            str: The generated prompt.
+            ChatPromptTemplate: The structured prompt for agent interaction.
         """
-        return self.text.prompt_agent()
+        agent_description = self.text.prompt_agent()
+        
+        return ChatPromptTemplate.from_messages([
+            ("system", agent_description), 
+            ("user", "{input}"),  
+            MessagesPlaceholder(variable_name="agent_scratchpad")  
+        ])
+
+    def get_prompt_function(self, category):
+        """
+        Get a callable function that returns a formatted prompt based on the category.
+
+        Args:
+            category (str): The category of the prompt (mlops, data_engineering, etc.)
+
+        Returns:
+            function: A function that when called, returns a formatted prompt string.
+        """
+        # Retrieve the prompt template for the given category
+        template = self.templates.get(category)
+
+        # If the template exists, return a lambda function that simply returns the formatted prompt
+        if template:
+            return lambda: template.format()  # No more need to pass 'data_theme'
+        
+        # If no template is found for the category, return a default message
+        return lambda: "No template found for category: {}".format(category)
+
