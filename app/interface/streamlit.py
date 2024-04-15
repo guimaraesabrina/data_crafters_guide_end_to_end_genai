@@ -27,3 +27,4 @@ if st.button('Gerar'):
             st.error('Erro ao processar a requisição')
     else:
         st.error('Por favor, digite alguma coisa para gerar.')
+        
