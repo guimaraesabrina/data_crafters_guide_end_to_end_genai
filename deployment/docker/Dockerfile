@@ -1,26 +1,30 @@
-# Use the official Python 3.10 slim image from Docker Hub as the base image
+# use the official Python 3.10 slim image from Docker Hub as the base image
 FROM python:3.10-slim
 
-# Set the working directory in the container
+# set the working directory in the container
 WORKDIR /app
 
-# Copy the dependency file first, to leverage Docker layer caching
+# copy the dependency file first, to leverage Docker layer caching
 COPY requirements.txt .
 
-# Install dependencies
+# install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the project files into the working directory
+# install Streamlit
+RUN pip install streamlit
+
+# copy the rest of the project files into the working directory
 COPY . .
 
-# Set environment variables to run Uvicorn in production
-ENV UVICORN_HOST=0.0.0.0 UVICORN_PORT=8000
+# set environment variables to run Uvicorn and Streamlit
+ENV UVICORN_HOST=0.0.0.0 UVICORN_PORT=8000 STREAMLIT_PORT=8501
 
-# Expose the port Uvicorn will run on
-EXPOSE 8000
+# expose the ports Uvicorn and Streamlit will run on
+EXPOSE 8000 8501
 
-# Command to run the application using Uvicorn
-CMD ["uvicorn", "app.backend.crafter:app", "--host", "0.0.0.0", "--port", "8000"]
+# command to run the applications using a script or directly
+CMD ["sh", "-c", "uvicorn app.backend.crafter:app --host 0.0.0.0 --port 8000 & streamlit run app/interface/streamlit_app.py --server.port 8501"]
+
 
 # docker build -t datacrafters-generative -f Dockerfile ../../
 
