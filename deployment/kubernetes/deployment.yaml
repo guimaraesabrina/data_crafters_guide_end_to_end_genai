@@ -17,7 +17,8 @@ spec:
         image: guimaraesabri/datacrafters-generative:develop  
         imagePullPolicy: Always  
         ports:
-        - containerPort: 8080
+        - containerPort: 8000  # uvicorn/FastAPI
+        - containerPort: 8501  # streamlit
         env:
         - name: OPENAI_BASE
           valueFrom:
@@ -44,6 +45,8 @@ spec:
             secretKeyRef:
               name: openai-credentials
               key: deployment_name
+
+
 
 
 
