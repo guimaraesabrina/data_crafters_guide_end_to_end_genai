@@ -1,5 +1,4 @@
 from langchain.agents import AgentExecutor, create_openai_tools_agent
-from langchain.agents import AgentExecutor, create_openai_tools_agent
 
 class DataCrafterAgent:
     def __init__(self, model, tools, prompt):
@@ -13,4 +12,6 @@ class DataCrafterAgent:
         return create_openai_tools_agent(self.model, self.tools, self.prompt)
 
     def invoke(self, input_text):
-        return self.agent_executor.invoke({"input": input_text})
+        return self.agent_executor.invoke(input_text)  
+
+

@@ -10,9 +10,6 @@ COPY requirements.txt .
 # install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# install Streamlit
-RUN pip install streamlit
-
 # copy the rest of the project files into the working directory
 COPY . .
 
@@ -24,7 +21,3 @@ EXPOSE 8000 8501
 
 # command to run the applications using a script or directly
 CMD ["sh", "-c", "uvicorn app.backend.crafter:app --host 0.0.0.0 --port 8000 & streamlit run app/interface/streamlit_app.py --server.port 8501"]
-
-
-# docker build -t datacrafters-generative -f Dockerfile ../../
-

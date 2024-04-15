@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Título da página
-st.title('Datacrafters Generative Agent')
+st.title('Datacrafters Generative Agent with Langchain 🐦')
 
 # Campo de entrada para o usuário digitar o texto
 input_text = st.text_input("Digite sua entrada:", "")
