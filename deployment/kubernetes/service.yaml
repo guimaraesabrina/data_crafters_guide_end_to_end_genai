@@ -1,11 +1,27 @@
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
-  name: datacrafters-generative-loadbalancer
+  name: api-service
 spec:
-  type: LoadBalancer
   selector:
     app: datacrafters-generative
   ports:
-    - port: 8080          
-      targetPort: 8000
+  - protocol: TCP
+    port: 80
+    targetPort: 8000
+  type: LoadBalancer
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: streamlit-service
+spec:
+  selector:
+    app: datacrafters-generative
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8501
+  type: LoadBalancer
+
