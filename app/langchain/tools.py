@@ -35,7 +35,12 @@ class CrafterTools:
         facilitating effective data collection, integration, and processing
         """
         prompt = self.system_prompts.get_prompt_function('data_engineering')()
-        chain = ChatPromptTemplate.from_messages([("system", prompt),("user", input_text)]) | self.model | self.output_parser
+
+        chain = ChatPromptTemplate.from_messages([
+            ("system", prompt),
+            ("user", input_text)
+        ]) | self.model | self.output_parser
+
         return chain.invoke()
 
     @tool
@@ -46,9 +51,11 @@ class CrafterTools:
         It answers questions about algorithm selection, hyperparameter tuning, 
         and more, ensuring the development of efficient and effective ML solutions.
         """
-
         prompt = self.system_prompts.get_prompt_function('machine_learning_engineering')()
-        chain = ChatPromptTemplate.from_messages([("system", prompt),("user", input_text)]) | self.model | self.output_parser
+        chain = ChatPromptTemplate.from_messages([
+            ("system", prompt),
+            ("user", input_text)
+        ]) | self.model | self.output_parser
         return chain.invoke()
 
     @tool
@@ -59,9 +66,11 @@ class CrafterTools:
         It provides support by answering questions and guiding best practices for implementing 
         and scaling ML models efficiently in production environments.
         """
-
         prompt = self.system_prompts.get_prompt_function('mlops')()
-        chain = ChatPromptTemplate.from_messages([("system", prompt),("user", input_text)]) | self.model | self.output_parser
+        chain = ChatPromptTemplate.from_messages([
+            ("system", prompt),
+            ("user", input_text)
+        ]) | self.model | self.output_parser
         return chain.invoke()
 
     @tool
@@ -73,7 +82,10 @@ class CrafterTools:
         strategic decisions through advanced analysis and visualization
         """
         prompt = self.system_prompts.get_prompt_function('data_science')()
-        chain = ChatPromptTemplate.from_messages([("system", prompt),("user", input_text)]) | self.model | self.output_parser
+        chain = ChatPromptTemplate.from_messages([
+            ("system", prompt),
+            ("user", input_text)
+        ]) | self.model | self.output_parser
         return chain.invoke()
 
     def available_chains(self):
@@ -84,3 +96,4 @@ class CrafterTools:
             list: A list of function references representing available chains.
         """
         return self.tools
+
